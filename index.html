@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>DOM Nodes Technical Documentation Page</title>
+		<!-- <link rel="stylesheet" href="normalize.css" /> -->
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<nav id="navbar">
+			<header>DOM Node Methods</header>
+			<ul>
+				<li><a href="#Introduction" class="nav-link">Introduction</a></li>
+				<li><a href="#appendChild" class="nav-link">appendChild</a></li>
+				<li><a href="#cloneNode" class="nav-link">cloneNode</a></li>
+        <li><a href="#compareDocumentPosition" class="nav-link">compareDocumentPosition</a></li>
+        <li><a href="#contains" class="nav-link">contains</a></li>
+        <li><a href="#hasChildNodes" class="nav-link">hasChildNodes</a></li>
+        <li><a href="#insertBefore" class="nav-link">insertBefore</a></li>
+        <li><a href="#isDefaultNamespace" class="nav-link">isDefaultNamespace</a></li>
+        <li><a href="#isEqualNode" class="nav-link">isEqualNode</a></li>
+        <li><a href="#isSameNode" class="nav-link">isSameNode</a></li>
+        <li><a href="#lookupPrefix" class="nav-link">lookupPrefix</a></li>
+        <li><a href="#lookupNamespaceURI" class="nav-link">lookupNamespaceURI</a></li>
+        <li><a href="#normalize" class="nav-link">normalize</a></li>
+        <li><a href="#removeChild" class="nav-link">removeChild</a></li>
+        <li><a href="#replaceChild" class="nav-link">replaceChild</a></li>
+        <li><a href="#Reference" class="nav-link">Reference</a></li>
+			</ul>
+		</nav>
+		<main id="main-doc">
+			<div class="container">
+				<section class="main-section" id="Introduction">
+					<header>Introduction</header>
+					<article>
+						<p>
+							This guide is not intended to be all comprehensive. It is only
+							including Node constructor methods that are cross browser
+							compatible.
+						</p>
+						<ul>
+							<li>
+								The DOM Node interface is an abstract base class upon which many
+								other DOM API objects are based, thus letting those object types
+								to be used similarly and often interchangeably. As an abstract
+								class, there is no such thing as a plain Node object. All
+								objects that implement Node functionality are based on one of
+								its subclasses. Most notable are Document, Element, and
+								DocumentFragment.
+							</li>
+							<li>
+								In addition, every kind of DOM node is represented by an
+								interface based on Node. These include Attr, CharacterData
+								(which Text, Comment, CDATASection and ProcessingInstruction are
+								all based on), DocumentType, Notation, Entity, and
+								EntityReference.
+							</li>
+							<li>
+								In some cases, a particular feature of the base Node interface
+								may not apply to one of its child interfaces; in that case, the
+								inheriting node may return null or throw an exception, depending
+								on circumstances. For example, attempting to add children to a
+								node type that cannot have children will throw an exception.
+							</li>
+							<li>
+								In addition to the properties below, Node inherits properties
+								from its parent, EventTarget.
+							</li>
+							<li>
+								In the past, DOM manipulation was accomplished mainly with
+								jQuery. There are many articles written recently about how you
+								can use native Javascript instead, such as
+								http://youmightnotneedjquery.com/
+							</li>
+						</ul>
+					</article>
+				</section>
+				<section class="main-section" id="appendChild">
+					<header>appendChild</header>
+					<article>
+						<p>
+							The Node.appendChild() method adds a node to the end of the list
+							of children of a specified parent node. If the given child is a
+							reference to an existing node in the document, appendChild() moves
+							it from its current position to the new position (there is no
+							requirement to remove the node from its parent node before
+							appending it to some other node).
+						</p>
+						<p>Syntax:</p>
+						<code>element.appendChild(aChild)</code>
+						<p>Example:</p>
+						<pre><code>// Create a new paragraph element, and append it to the end of the document body    
+let p = document.createElement("p");
+document.body.appendChild(p);</code></pre>
+					</article>
+				</section>
+				<section class="main-section" id="cloneNode">
+					<header>cloneNode</header>
+					<article>
+						<p>
+							The Node.cloneNode() method returns a duplicate of the node on
+							which this method was called.
+						</p>
+						<p>Syntax:</p>
+						<code>let newClone = node.cloneNode([deep])</code>
+						<p>Example:</p>
+						<pre><code>let p = document.getElementById("para1")
+let p_prime = p.cloneNode(true)</code></pre>
+					</article>
+				</section>
+				<section class="main-section" id="compareDocumentPosition">
+					<header>compareDocumentPosition</header>
+					<article>
+						<p>
+							The Node.compareDocumentPosition() method reports the position of
+							the given node relative to another node in any document — not just
+							the given node’s document.
+						</p>
+						<p>Syntax:</p>
+						<code>compareMask = node.compareDocumentPosition(otherNode)</code>
+						<p>Example:</p>
+						<pre><code>const head = document.head;
+const body = document.body;
+
+if (head.compareDocumentPosition(body) & Node.DOCUMENT_POSITION_FOLLOWING) {
+  console.log('Well-formed document');
+} else {
+  console.error('<head> is not before <body>');
+}</code></pre>
+					</article>
+				</section>
+				<section class="main-section" id="contains">
+					<header>contains</header>
+          <article>
+						<p>
+							The Node.contains() method returns a Boolean value indicating whether a node is a descendant of a given node, i.e. the node itself, one of its direct children (childNodes), one of the children's direct children, and so on.
+						</p>
+						<p>Syntax:</p>
+						<code>node.contains( otherNode )</code>
+						<p>Example:</p>
+            <p>This function checks to see if an element is in the page's body. As contains is inclusive and determining if the body contains itself isn't the intention of isInPage this case explicitly returns false.</p>
+						<pre><code>function isInPage(node) {
+  return (node === document.body) ? false : document.body.contains(node);
+}</code></pre>
+					</article>
+				</section>
+				<section class="main-section" id="hasChildNodes">
+					<header>hasChildNodes</header>
+          <article>
+						<p>
+							The Node.hasChildNodes() method returns a Boolean value indicating whether the given Node has child nodes or not.
+						</p>
+						<p>Syntax:</p>
+						<code>bool = node.hasChildNodes();</code>
+						<p>Example:</p>
+						<pre><code>let foo = document.getElementById('foo');
+
+if (foo.hasChildNodes()) {
+  // Do something with 'foo.childNodes'
+}</code></pre>
+					</article>
+				</section>
+				<section class="main-section" id="insertBefore">
+					<header>insertBefore</header>
+          <article>
+						<p>
+							The Node.insertBefore() method inserts a node before a reference node as a child of a specified parent node. If the given node already exists in the document, insertBefore() moves it from its current position to the new position. (That is, it will automatically be removed from its existing parent before appending it to the specified new parent.)
+						</p>
+						<p>Syntax:</p>
+						<code>let insertedNode = parentNode.insertBefore(newNode, referenceNode);</code>   
+					</article>
+				</section>
+				<section class="main-section" id="isDefaultNamespace">
+					<header>isDefaultNamespace</header>
+          <article>
+						<p>
+							The Node.isDefaultNamespace() method accepts a namespace URI as an argument and returns a Boolean with a value of true if the namespace is the default namespace on the given node or false if not.
+						</p>
+						<p>Syntax:</p>
+						<code>result = node.isDefaultNamespace(namespaceURI);</code>
+					</article>
+				</section>
+				<section class="main-section" id="isEqualNode">
+					<header>isEqualNode</header>
+          <article>
+						<p>
+							The Node.isEqualNode() method tests whether two nodes are equal. Two nodes are equal when they have the same type, defining characteristics (for elements, this would be their ID, number of children, and so forth), its attributes match, and so on. The specific set of data points that must match varies depending on the types of the nodes.
+						</p>
+						<p>Syntax:</p>
+						<code>var isEqualNode = node.isEqualNode(otherNode);</code>
+					</article>
+				</section>
+				<section class="main-section" id="isSameNode">
+					<header>isSameNode</header>
+          <article>
+						<p>
+							The isSameNode() method for Node objects tests whether two nodes are the same (that is, whether they reference the same object).
+						</p>
+						<p>Syntax:</p>
+						<code>const isSameNode = node.isSameNode(otherNode)</code>
+					</article>
+				</section>
+				<section class="main-section" id="lookupPrefix">
+					<header>lookupPrefix</header>
+          <article>
+						<p>
+							The Node.lookupPrefix() method returns a DOMString containing the prefix for a given namespace URI, if present, and null if not. When multiple prefixes are possible, the result is implementation-dependent.
+						</p>
+					</article>
+				</section>
+				<section class="main-section" id="lookupNamespaceURI">
+					<header>lookupNamespaceURI</header>
+          <article>
+						<p>
+							The Node.lookupNamespaceURI() method accepts a prefix and returns the namespace URI associated with it on the given node if found (and null if not).
+						</p>
+						<p>Syntax:</p>
+						<code>var namespace = node.lookupNamespaceURI(prefix);</code>
+					</article>
+				</section>
+				<section class="main-section" id="normalize">
+					<header>normalize</header>
+          <article>
+						<p>
+							The Node.normalize() method puts the specified node and all of its sub-tree into a "normalized" form. In a normalized sub-tree, no text nodes in the sub-tree are empty and there are no adjacent text nodes.
+						</p>
+						<p>Syntax:</p>
+						<code>element.normalize();</code>
+					</article>
+				</section>
+				<section class="main-section" id="removeChild">
+					<header>removeChild</header>
+          <article>
+						<p>
+							The Node.removeChild() method removes a child node from the DOM and returns the removed node.
+						</p>
+						<p>Syntax:</p>
+						<code>node.removeChild(child);</code>
+					</article>
+				</section>
+				<section class="main-section" id="replaceChild">
+					<header>replaceChild</header>
+          <article>
+						<p>
+							The Node.replaceChild() method replaces a child node within the given (parent) node. Note the idiosyncratic argument order (new before old). ChildNode.replaceWith() may be easier to read and use.
+						</p>
+						<p>Syntax:</p>
+						<code>let oldChild = parentNode.replaceChild(newChild, oldChild);</code>
+					</article>
+				</section>
+        <section class="main-section" id="Reference">
+					<header>Reference</header>
+          <article>
+						<p>
+							Information on this page is taken from <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">MDN</a>
+						</p>
+					</article>
+				</section>
+			</div>
+		</main>
+		<script src="main.js"></script>
+		<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+	</body>
+</html>
