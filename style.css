@@ -60,13 +60,75 @@ code {
 	line-height: 1.4;
 	background-color: #e3e3e3;
 	border-left: 6px solid #00458b;
+	word-break: break-all;
+	white-space: normal;
+}
+
+#navbar {
+	width: 234px;
+	background-color: #eee;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#navbar.open {
+	-webkit-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
+
+#navbar header {
+	padding: 22px;
+}
+
+#navbar ul {
+	margin: 22px;
+	padding: 0;
+	list-style: none;
+}
+
+.nav-link {
+	padding: 5px 0;
+	display: block;
+}
+
+.hamburger {
+	display: none;
+}
+
+.hamburger #menu svg {
+	width: 40px;
+	fill: #000;
+}
+
+/* screen smaller than 700px */
+@media (max-width: 700px) {
+	.hamburger {
+		display: block;
+		position: fixed;
+		right: 21px;
+		top: 20px;
+	}
+	#navbar {
+		transform: translate(-300px, 0);
+		transition: transform 0.3s ease;
+	}
+	main#main-doc {
+		margin-left: 0;
+	}
 }
 
 /* Layout styles */
 #main-doc {
 	margin-top: 40px;
 	margin-bottom: 40px;
+	margin-left: 234px;
+	padding: 0 2rem;
 }
+
 .container {
 	margin: 0 auto;
 	padding-left: 12px;
